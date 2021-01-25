@@ -21,8 +21,6 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
-import { AddressFormComponent } from './address-form/address-form.component';
-import { PasswordMatchValidatorDirective } from './password-match-validator.directive'; //this to use ngModule
 
 @NgModule({
   declarations: [
@@ -30,8 +28,6 @@ import { PasswordMatchValidatorDirective } from './password-match-validator.dire
     TodoListComponent,
     LoginComponent,
     RegisterComponent,
-    AddressFormComponent,
-    PasswordMatchValidatorDirective
   ],
   imports: [
     BrowserModule,
