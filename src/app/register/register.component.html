@@ -1,0 +1,111 @@
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>User Registration</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Email</mat-label>
+                        <input matInput type="email" id="email" placeholder="Email" formControlName="email" required>
+                        <mat-error *ngIf="registerForm.controls['email'].hasError('required')">
+                            Email is <strong>required</strong>
+                        </mat-error>
+                        <mat-error *ngIf="registerForm.controls['email'].hasError('email')">Not a valid email.</mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row" formGroupName="pwGroup">
+                <div class="col">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Enter your password</mat-label>
+                        <input matInput [type]="hide ? 'password' : 'text'" id="password" placeholder="Password" formControlName="password" required minlength="6">
+                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                        <mat-error *ngIf="password?.errors?.required">
+                            Password is <strong>required</strong>
+                        </mat-error>
+                        <mat-error *ngIf="password?.errors?.minlength">
+                            Password must be at least 6 characters long.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Confirm Password</mat-label>
+                        <input matInput type="password" id="passwordConfirm" placeholder="Confirm Password" formControlName="passwordConfirm">
+                        <mat-error *ngIf="passwordConfirm?.errors?.required">
+                            Confirm Password is <strong>required</strong>
+                        </mat-error>
+                        <mat-error *ngIf="passwordConfirm?.errors?.minlength">
+                            Confirm Password must be at least 6 characters long.
+                        </mat-error>
+                        <mat-error *ngIf="registerForm.errors?.invalid">
+                            Password does not match!
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Country</mat-label>
+                        <mat-select formControlName="country">
+                            <mat-option>-- None --</mat-option>
+                            <mat-option value="vn">Việt Nam</mat-option>
+                            <mat-option value="us">US</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="registerForm.controls['country'].hasError('required')">
+                            Country is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Age</mat-label>
+                        <input matInput type="number" formControlName="age">
+                        <mat-error *ngIf="registerForm.controls['age'].hasError('required')">
+                            Age is <strong>required</strong>
+                        </mat-error>
+                        <mat-error *ngIf="registerForm.controls['age'].hasError('min')">
+                            You have to be over 18 to register an account
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label>Gender: </label>
+                    <mat-radio-group formControlName="gender">
+                        <mat-radio-button value="male">Male</mat-radio-button>
+                        <mat-radio-button value="female">Female</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Phone</mat-label>
+                        <input matInput type="tel" formControlName="phone" placeholder="+8412345678">
+                        <mat-error *ngIf="registerForm.controls['phone'].hasError('required')">
+                            Phone is <strong>required</strong>
+                        </mat-error>
+                        <mat-error *ngIf="registerForm.controls['phone'].hasError('pattern')">Phone must start with +84 followed by 9 or 10 digits.</mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <pre>
+                {{ registerForm.value | json }}
+            </pre>
+        </mat-card-content>
+        <mat-card-actions>
+            <!-- <button mat-raised-button color="primary" type="submit" [disabled]="!registerForm.valid">Submit</button> -->
+            <button mat-raised-button color="primary" type="submit">Submit</button>
+        </mat-card-actions>
+
+    </mat-card>
+</form>
